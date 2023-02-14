@@ -1,10 +1,17 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config'; // dotenv
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DatabaseModule } from './database/database.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-    imports: [],
-    controllers: [AppController],
-    providers: [AppService],
+    imports: [
+        TypeOrmModule.forRoot(),
+        ConfigModule.forRoot({ isGlobal: true }),
+        // UsersModule,
+        AuthModule,
+        DatabaseModule,
+    ],
+    providers: [],
 })
 export class AppModule {}
